@@ -4,11 +4,17 @@
   "description": "world's smallest spreadsheet",
   "main": "index.js",
   "scripts": {
+    "build": "mkdir -p public/js; browserify client/js/app.js > public/js/bundle.js",
+    "watch": "watchify client/js/app.js -o public/js/bundle.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Taras Ignashchenko <tignashchenko@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "express": "^4.15.2"
+  },
+  "devDependencies": {
+    "browserify": "^14.3.0",
+    "watchify": "^3.9.0"
   }
 }
