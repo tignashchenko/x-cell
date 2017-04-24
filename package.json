@@ -1,0 +1,11 @@
+{
+  "name": "x-cell",
+  "version": "1.0.0",
+  "description": "world's smallest spreadsheet",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Taras Ignashchenko <tignashchenko@gmail.com>",
+  "license": "MIT"
+}
