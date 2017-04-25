@@ -11,6 +11,22 @@ describe('table-view', () => {
   });
 
   describe('table body', () => {
+    it('highlights the current cell when clicked', () => {
+      const model = new TableModel(10, 5);
+      const view = new TableView(model);
+      view.init();
+
+      let trs = document.querySelectorAll('TBODY TR');
+      let td = trs[2].cells[3];
+      expect(td.className).toBe('');
+
+      td.click();
+
+      trs = document.querySelectorAll('TBODY TR');
+      td = trs[2].cells[3];
+      expect(td.className).not.toBe('');
+    });
+    
     it('has the right size', () => {
       const numCols = 6;
       const numRows = 10;
