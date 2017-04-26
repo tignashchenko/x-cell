@@ -11,6 +11,22 @@ describe('table-view', () => {
   });
 
   describe('formula-bar', () => {
+    it('makes changes TO the value of the current cell', () => {
+      const model = new TableModel(3, 3);
+      const view = new TableView(model);
+      view.init();
+
+      let trs = document.querySelectorAll('TBODY TR');
+      let td = trs[0].cells[0];
+      expect(td.textContent).toBe('');
+
+      document.querySelector('#formula-bar').value = '65';
+      view.handleFormulaBarChange();
+
+      trs = document.querySelectorAll('TBODY TR');
+      expect(trs[0].cells[0].textContent).toBe('65');
+    });
+
     it('updates FROM the vlaue of the current cell', () => {
       const model = new TableModel(3, 3);
       const view = new TableView(model);
