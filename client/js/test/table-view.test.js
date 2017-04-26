@@ -10,6 +10,23 @@ describe('table-view', () => {
     document.documentElement.innerHTML = html;
   });
 
+  describe('formula-bar', () => {
+    it('updates FROM the vlaue of the current cell', () => {
+      const model = new TableModel(3, 3);
+      const view = new TableView(model);
+      model.setValue({col: 2, row: 1}, '123');
+      view.init();
+
+      const formulaBarEl = document.querySelector('#formula-bar');
+      expect(formulaBarEl.value).toBe('');
+
+      const trs = document.querySelectorAll('TBODY TR');
+      trs[1].cells[2].click();
+
+      expect(formulaBarEl.value).toBe('123');
+    });
+  });
+
   describe('table body', () => {
     it('highlights the current cell when clicked', () => {
       const model = new TableModel(10, 5);
@@ -26,7 +43,7 @@ describe('table-view', () => {
       td = trs[2].cells[3];
       expect(td.className).not.toBe('');
     });
-    
+
     it('has the right size', () => {
       const numCols = 6;
       const numRows = 10;
