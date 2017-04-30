@@ -71,6 +71,25 @@ class TableModel {
   setValue(location, value) {
     this.data[this._getCellId(location)] = value;
   }
+
+  getColumnValues(colNum) {
+    var colValues = [];
+    for(var i = 0; i < this.numRows; i++) {
+      let currentValue = parseInt(this.getValue({col: colNum, row: i}));
+      if(!isNaN(currentValue)) {
+        colValues.push(currentValue);
+      }
+    }
+    return colValues;
+  }
+
+  getSum(array) {
+    return array.filter(function(item) {
+      return typeof(item) === 'number';
+    }).reduce(function(prevNum, currNum) {
+      return prevNum + currNum;
+    }, 0);
+  }
 }
 
 module.exports = TableModel;
@@ -94,6 +113,7 @@ class TableView {
   initDomReferences() {
     this.headerRowEl = document.querySelector('THEAD TR');
     this.sheetBodyEl = document.querySelector('TBODY');
+    this.sheetSumEl = document.querySelector('TFOOT');
     this.formulaBarEl = document.querySelector('#formula-bar');
   }
 
@@ -115,6 +135,7 @@ class TableView {
   renderTable() {
     this.renderTableHeader();
     this.renderTableBody();
+    this.renderSumRow();
   }
 
   renderTableHeader() {
@@ -149,6 +170,20 @@ class TableView {
     this.sheetBodyEl.appendChild(fragment);
   }
 
+  renderSumRow() {
+    const fragment = document.createDocumentFragment();
+      const tr = createTR();
+      for(let col = 0; col < this.model.numCols; col++) {
+        const td = createTD();
+        const colValueArr = this.model.getColumnValues(col);
+        td.innerHTML = this.model.getSum(colValueArr);
+        tr.appendChild(td);
+      }
+      fragment.appendChild(tr);
+      removeChildren(this.sheetSumEl);
+      this.sheetSumEl.appendChild(fragment);
+  }
+
   attachEventHandlers() {
     this.sheetBodyEl.addEventListener('click', this.handleSheetClick.bind(this));
     this.formulaBarEl.addEventListener('keyup', this.handleFormulaBarChange.bind(this));
@@ -158,6 +193,7 @@ class TableView {
     const value = this.formulaBarEl.value;
     this.model.setValue(this.currentCellLocation, value);
     this.renderTableBody();
+    this.renderSumRow();
   }
 
   handleSheetClick(event) {
@@ -168,6 +204,7 @@ class TableView {
     this.renderTableBody();
     this.renderFormulaBar();
   }
+
 }
 
 module.exports = TableView;
