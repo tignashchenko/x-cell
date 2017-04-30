@@ -4,6 +4,7 @@
   "description": "world's smallest spreadsheet",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "build": "mkdir -p public/js; browserify client/js/app.js > public/js/bundle.js",
     "watch": "watchify client/js/app.js -o public/js/bundle.js",
     "test": "jest"
