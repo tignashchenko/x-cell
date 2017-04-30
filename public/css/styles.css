@@ -13,3 +13,8 @@ td {
 .current-cell {
   background-color: pink;
 }
+
+tfoot {
+  background-color: lawngreen;
+  font-weight: bold;
+}

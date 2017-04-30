@@ -13,7 +13,7 @@ describe('dom-util', () => {
       });
 
       it('sets the text of the TH', () => {
-        const text = 'Oh that\'s just great! Well, gave mover, man!';
+        const text = 'Oh that\'s just great! Well, gave over, man!';
         const el = createTH(text);
         expect(el.textContent).toEqual(text);
       });
