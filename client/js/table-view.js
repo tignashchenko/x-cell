@@ -16,7 +16,7 @@ class TableView {
   initDomReferences() {
     this.headerRowEl = document.querySelector('THEAD TR');
     this.sheetBodyEl = document.querySelector('TBODY');
-    this.sheetSumEl = document.querySelector('TFOOT');
+    this.footSumEl = document.querySelector('TFOOT');
     this.formulaBarEl = document.querySelector('#formula-bar');
   }
 
