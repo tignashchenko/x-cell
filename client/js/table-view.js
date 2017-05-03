@@ -83,8 +83,8 @@ class TableView {
         tr.appendChild(td);
       }
       fragment.appendChild(tr);
-      removeChildren(this.sheetSumEl);
-      this.sheetSumEl.appendChild(fragment);
+      removeChildren(this.footSumEl);
+      this.footSumEl.appendChild(fragment);
   }
 
   attachEventHandlers() {
