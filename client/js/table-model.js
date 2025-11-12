@@ -19,8 +19,8 @@ class TableModel {
 
   getColumnValues(colNum) {
     let colValues = [];
-    for(let i = 0; i < this.numRows; i++) {
-      let currentValue = parseInt(this.getValue({col: colNum, row: i}));
+    for(let row = 0; row < this.numRows; row++) {
+      let currentValue = parseInt(this.getValue({col: colNum, row: row}));
       if(!isNaN(currentValue)) {
         colValues.push(currentValue);
       }
